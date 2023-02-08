@@ -1,2 +1,24 @@
-# Hello_Rails_App
-we have a clear path from the browser to the routes file to the Controller action, which can pull data from the database through the Model and create an instance variable that is then sent to the View to be displayed to the user.
+# README
+
+This README would normally document whatever steps are necessary to get the
+application up and running.
+
+Things you may want to cover:
+
+* Ruby version
+
+* System dependencies
+
+* Configuration
+
+* Database creation
+
+* Database initialization
+
+* How to run the test suite
+
+* Services (job queues, cache servers, search engines, etc.)
+
+* Deployment instructions
+
+* ...
