@@ -39,3 +39,192 @@ Processing by PagesController#hello as HTML
 Completed 200 OK in 173ms (Views: 157.9ms | ActiveRecord: 0.0ms | Allocations: 41164)
 
 
+Started GET "/" for ::1 at 2023-02-08 18:24:34 +0500
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /var/lib/gems/3.0.0/gems/railties-7.0.4.2/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /var/lib/gems/3.0.0/gems/railties-7.0.4.2/lib/rails/templates/rails/welcome/index.html.erb (Duration: 3.7ms | Allocations: 826)
+Completed 200 OK in 19ms (Views: 8.4ms | ActiveRecord: 0.0ms | Allocations: 6716)
+
+
+Started GET "/pages/index" for ::1 at 2023-02-08 18:25:18 +0500
+Processing by PagesController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering pages/index.html.erb within layouts/application
+  Rendered pages/index.html.erb within layouts/application (Duration: 0.5ms | Allocations: 129)
+  Rendered layout layouts/application.html.erb (Duration: 113.4ms | Allocations: 35035)
+Completed 200 OK in 116ms (Views: 115.5ms | ActiveRecord: 0.0ms | Allocations: 36159)
+
+
+Started GET "/" for ::1 at 2023-02-08 18:26:05 +0500
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /var/lib/gems/3.0.0/gems/railties-7.0.4.2/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /var/lib/gems/3.0.0/gems/railties-7.0.4.2/lib/rails/templates/rails/welcome/index.html.erb (Duration: 1.9ms | Allocations: 826)
+Completed 200 OK in 19ms (Views: 6.5ms | ActiveRecord: 0.0ms | Allocations: 6716)
+
+
+Started GET "/pages/index" for ::1 at 2023-02-08 18:26:13 +0500
+Processing by PagesController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering pages/index.html.erb within layouts/application
+  Rendered pages/index.html.erb within layouts/application (Duration: 0.5ms | Allocations: 136)
+  Rendered layout layouts/application.html.erb (Duration: 97.9ms | Allocations: 34905)
+Completed 200 OK in 102ms (Views: 100.1ms | ActiveRecord: 0.0ms | Allocations: 36029)
+
+
+Started GET "/index" for ::1 at 2023-02-08 18:26:25 +0500
+  
+ActionController::RoutingError (No route matches [GET] "/index"):
+  
+Started GET "/welcome/index" for ::1 at 2023-02-08 18:26:38 +0500
+  
+ActionController::RoutingError (No route matches [GET] "/welcome/index"):
+  
+Started GET "/pages/index" for ::1 at 2023-02-08 18:26:47 +0500
+Processing by PagesController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering pages/index.html.erb within layouts/application
+  Rendered pages/index.html.erb within layouts/application (Duration: 0.1ms | Allocations: 7)
+  Rendered layout layouts/application.html.erb (Duration: 11.3ms | Allocations: 2506)
+Completed 200 OK in 19ms (Views: 18.3ms | ActiveRecord: 0.0ms | Allocations: 2855)
+
+
+Started GET "/" for ::1 at 2023-02-08 18:47:48 +0500
+Processing by PagesController#hello as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering pages/hello.html.erb within layouts/application
+  Rendered pages/hello.html.erb within layouts/application (Duration: 1.5ms | Allocations: 463)
+  Rendered layout layouts/application.html.erb (Duration: 142.9ms | Allocations: 35129)
+Completed 200 OK in 156ms (Views: 147.7ms | ActiveRecord: 0.0ms | Allocations: 41170)
+
+
+Started GET "/" for ::1 at 2023-02-08 18:50:05 +0500
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /var/lib/gems/3.0.0/gems/railties-7.0.4.2/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /var/lib/gems/3.0.0/gems/railties-7.0.4.2/lib/rails/templates/rails/welcome/index.html.erb (Duration: 1.7ms | Allocations: 826)
+Completed 200 OK in 12ms (Views: 4.2ms | ActiveRecord: 0.0ms | Allocations: 6716)
+
+
+Started GET "/welcome/index" for ::1 at 2023-02-08 18:50:15 +0500
+  
+ActionController::RoutingError (No route matches [GET] "/welcome/index"):
+  
+Started GET "/pages/index" for ::1 at 2023-02-08 18:50:28 +0500
+Processing by PagesController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering pages/index.html.erb within layouts/application
+  Rendered pages/index.html.erb within layouts/application (Duration: 0.6ms | Allocations: 133)
+  Rendered layout layouts/application.html.erb (Duration: 106.3ms | Allocations: 34579)
+Completed 200 OK in 110ms (Views: 109.1ms | ActiveRecord: 0.0ms | Allocations: 35651)
+
+
+Started GET "/" for ::1 at 2023-02-08 18:51:18 +0500
+Processing by PagesController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering pages/index.html.erb within layouts/application
+  Rendered pages/index.html.erb within layouts/application (Duration: 1.1ms | Allocations: 451)
+  Rendered layout layouts/application.html.erb (Duration: 133.5ms | Allocations: 35111)
+Completed 200 OK in 142ms (Views: 137.0ms | ActiveRecord: 0.0ms | Allocations: 39951)
+
+
+Started GET "/pages/index" for ::1 at 2023-02-08 18:51:40 +0500
+  
+ActionController::RoutingError (No route matches [GET] "/pages/index"):
+  
+Started GET "/" for ::1 at 2023-02-08 18:51:51 +0500
+Processing by PagesController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering pages/index.html.erb within layouts/application
+  Rendered pages/index.html.erb within layouts/application (Duration: 0.2ms | Allocations: 7)
+  Rendered layout layouts/application.html.erb (Duration: 10.8ms | Allocations: 2545)
+Completed 200 OK in 14ms (Views: 12.4ms | ActiveRecord: 0.0ms | Allocations: 2898)
+
+
+Started GET "/" for ::1 at 2023-02-08 18:54:40 +0500
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /var/lib/gems/3.0.0/gems/railties-7.0.4.2/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /var/lib/gems/3.0.0/gems/railties-7.0.4.2/lib/rails/templates/rails/welcome/index.html.erb (Duration: 2.3ms | Allocations: 826)
+Completed 200 OK in 13ms (Views: 5.1ms | ActiveRecord: 0.0ms | Allocations: 6716)
+
+
+Started GET "/pages/hello" for ::1 at 2023-02-08 18:54:53 +0500
+Processing by PagesController#hello as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering pages/hello.html.erb within layouts/application
+  Rendered pages/hello.html.erb within layouts/application (Duration: 0.8ms | Allocations: 149)
+  Rendered layout layouts/application.html.erb (Duration: 111.8ms | Allocations: 34765)
+Completed 200 OK in 119ms (Views: 116.9ms | ActiveRecord: 0.0ms | Allocations: 36037)
+
+
+Started GET "/" for ::1 at 2023-02-08 18:55:31 +0500
+Processing by PagesController#hello as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering pages/hello.html.erb within layouts/application
+  Rendered pages/hello.html.erb within layouts/application (Duration: 3.8ms | Allocations: 463)
+  Rendered layout layouts/application.html.erb (Duration: 126.1ms | Allocations: 35166)
+Completed 200 OK in 144ms (Views: 131.2ms | ActiveRecord: 0.0ms | Allocations: 41206)
+
+
+  [1m[35m (4.3ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY)[0m
+  [1m[35m (2.9ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateStudents (20230208185812)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE TABLE "students" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "first_name" varchar, "last_name" varchar, "address" varchar, "age" integer, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20230208185812"]]
+  [1m[36mTRANSACTION (3.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.3ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["key", "environment"], ["value", "development"], ["created_at", "2023-02-08 19:36:34.125738"], ["updated_at", "2023-02-08 19:36:34.125738"]]
+  [1m[36mTRANSACTION (2.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to AddColumnsToStudent (20230208200440)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.5ms)[0m  [1m[35mALTER TABLE "students" ADD "contact" varchar[0m
+  [1m[35m (0.5ms)[0m  [1m[35mALTER TABLE "students" ADD "identity" varchar[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20230208200440"]]
+  [1m[36mTRANSACTION (3.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to RemoveColumnToStudent (20230208200847)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20230208200847"]]
+  [1m[36mTRANSACTION (3.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateUsers (20230209032421)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE TABLE "users" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "Photo" varchar, "Bio" text, "UpdatedAt" date, "CreatedAt" date, "PostsCounter" integer, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20230209032421"]]
+  [1m[36mTRANSACTION (4.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateLikes (20230209033253)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE TABLE "likes" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "AuthorId" integer, "PostId" integer, "CreatedAt" date, "UpatedAt" date, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20230209033253"]]
+  [1m[36mTRANSACTION (133.1ms)[0m  [1m[36mcommit transaction[0m
+Migrating to CreatePosts (20230209033541)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE TABLE "posts" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "AuthorId" integer, "Title" varchar, "Text" text, "CreatedAd" date, "UpdatedAt" date, "CommentCounter" integer, "LikeCounter" integer, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20230209033541"]]
+  [1m[36mTRANSACTION (5.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.4ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateComments (20230209034108)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE TABLE "comments" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "AuthorId" integer, "PostId" integer, "Text" text, "CreatedAt" date, "UpdatedAt" date, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20230209034108"]]
+  [1m[36mTRANSACTION (4.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.5ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
