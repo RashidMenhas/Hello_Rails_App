@@ -228,3 +228,448 @@ Migrating to CreateComments (20230209034108)
   [1m[36mTRANSACTION (4.1ms)[0m  [1m[36mcommit transaction[0m
   [1m[36mActiveRecord::InternalMetadata Load (0.5ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
   [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to RemoveColumnFromDb (20230209052600)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE TEMPORARY TABLE "acomments" ("id" integer NOT NULL PRIMARY KEY, "AuthorId" integer DEFAULT NULL, "PostId" integer DEFAULT NULL, "Text" text DEFAULT NULL, "CreatedAt" date DEFAULT NULL, "UpdatedAt" date DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "acomments" ("id","AuthorId","PostId","Text","CreatedAt","UpdatedAt","created_at","updated_at")
+                     SELECT "id","AuthorId","PostId","Text","CreatedAt","UpdatedAt","created_at","updated_at" FROM "comments"[0m
+  [1m[35m (0.5ms)[0m  [1m[35mDROP TABLE "comments"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TABLE "comments" ("id" integer NOT NULL PRIMARY KEY, "AuthorId" integer DEFAULT NULL, "PostId" integer DEFAULT NULL, "CreatedAt" date DEFAULT NULL, "UpdatedAt" date DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "comments" ("id","AuthorId","PostId","CreatedAt","UpdatedAt","created_at","updated_at")
+                     SELECT "id","AuthorId","PostId","CreatedAt","UpdatedAt","created_at","updated_at" FROM "acomments"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE "acomments"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20230209052600"]]
+  [1m[36mTRANSACTION (6.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to AddColumn (20230209052959)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.5ms)[0m  [1m[35mALTER TABLE "comments" ADD "Text" text[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20230209052959"]]
+  [1m[36mTRANSACTION (4.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to AddInComments (20230209053457)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.6ms)[0m  [1m[35mALTER TABLE "comments" ADD "Dob" datetime(6)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (1.0ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20230209053457"]]
+  [1m[36mTRANSACTION (2.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to RenameCommentsTable (20230209053729)
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to RenameCommentsTable (20230209053729)
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to RenameCommentsTable (20230209053729)
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to RenameCommentsTable (20230209053729)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to RenameCommentsTable (20230209053729)
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to RenameColumn (20230209061644)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TEMPORARY TABLE "acomments" ("id" integer NOT NULL PRIMARY KEY, "AuthorId" integer DEFAULT NULL, "PostId" integer DEFAULT NULL, "CreatedAt" date DEFAULT NULL, "UpdatedAt" date DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "Text" text DEFAULT NULL, "date_of_birth" datetime(6) DEFAULT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "acomments" ("id","AuthorId","PostId","CreatedAt","UpdatedAt","created_at","updated_at","Text","date_of_birth")
+                     SELECT "id","AuthorId","PostId","CreatedAt","UpdatedAt","created_at","updated_at","Text","Dob" FROM "comments"[0m
+  [1m[35m (0.5ms)[0m  [1m[35mDROP TABLE "comments"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE TABLE "comments" ("id" integer NOT NULL PRIMARY KEY, "AuthorId" integer DEFAULT NULL, "PostId" integer DEFAULT NULL, "CreatedAt" date DEFAULT NULL, "UpdatedAt" date DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "Text" text DEFAULT NULL, "date_of_birth" datetime(6) DEFAULT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "comments" ("id","AuthorId","PostId","CreatedAt","UpdatedAt","created_at","updated_at","Text","date_of_birth")
+                     SELECT "id","AuthorId","PostId","CreatedAt","UpdatedAt","created_at","updated_at","Text","date_of_birth" FROM "acomments"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE "acomments"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20230209061644"]]
+  [1m[36mTRANSACTION (3.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to RemoveColumn (20230209100717)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.3ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE TEMPORARY TABLE "acomments" ("id" integer NOT NULL PRIMARY KEY, "AuthorId" integer DEFAULT NULL, "PostId" integer DEFAULT NULL, "CreatedAt" date DEFAULT NULL, "UpdatedAt" date DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "Text" text DEFAULT NULL, "date_of_birth" datetime(6) DEFAULT NULL)[0m
+  [1m[35m (0.2ms)[0m  [1m[32mINSERT INTO "acomments" ("id","AuthorId","PostId","CreatedAt","UpdatedAt","created_at","updated_at","Text","date_of_birth")
+                     SELECT "id","AuthorId","PostId","CreatedAt","UpdatedAt","created_at","updated_at","Text","date_of_birth" FROM "comments"[0m
+  [1m[35m (0.8ms)[0m  [1m[35mDROP TABLE "comments"[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE TABLE "comments" ("id" integer NOT NULL PRIMARY KEY, "PostId" integer DEFAULT NULL, "CreatedAt" date DEFAULT NULL, "UpdatedAt" date DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "Text" text DEFAULT NULL, "date_of_birth" datetime(6) DEFAULT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "comments" ("id","PostId","CreatedAt","UpdatedAt","created_at","updated_at","Text","date_of_birth")
+                     SELECT "id","PostId","CreatedAt","UpdatedAt","created_at","updated_at","Text","date_of_birth" FROM "acomments"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE "acomments"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.3ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20230209100717"]]
+  [1m[36mTRANSACTION (4.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.5ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to RemoveColumnFormLikes (20230209100859)
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.2ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.3ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.2ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE TEMPORARY TABLE "alikes" ("id" integer NOT NULL PRIMARY KEY, "AuthorId" integer DEFAULT NULL, "PostId" integer DEFAULT NULL, "CreatedAt" date DEFAULT NULL, "UpatedAt" date DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "alikes" ("id","AuthorId","PostId","CreatedAt","UpatedAt","created_at","updated_at")
+                     SELECT "id","AuthorId","PostId","CreatedAt","UpatedAt","created_at","updated_at" FROM "likes"[0m
+  [1m[35m (0.5ms)[0m  [1m[35mDROP TABLE "likes"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE TABLE "likes" ("id" integer NOT NULL PRIMARY KEY, "PostId" integer DEFAULT NULL, "CreatedAt" date DEFAULT NULL, "UpatedAt" date DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.2ms)[0m  [1m[32mINSERT INTO "likes" ("id","PostId","CreatedAt","UpatedAt","created_at","updated_at")
+                     SELECT "id","PostId","CreatedAt","UpatedAt","created_at","updated_at" FROM "alikes"[0m
+  [1m[35m (0.4ms)[0m  [1m[35mDROP TABLE "alikes"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.2ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20230209100859"]]
+  [1m[36mTRANSACTION (3.9ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to RemoveColumnFormPost (20230209101014)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.2ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to RemoveColumnFormPost (20230209101014)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE TEMPORARY TABLE "aposts" ("id" integer NOT NULL PRIMARY KEY, "AuthorId" integer DEFAULT NULL, "Title" varchar DEFAULT NULL, "Text" text DEFAULT NULL, "CreatedAd" date DEFAULT NULL, "UpdatedAt" date DEFAULT NULL, "CommentCounter" integer DEFAULT NULL, "LikeCounter" integer DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.2ms)[0m  [1m[32mINSERT INTO "aposts" ("id","AuthorId","Title","Text","CreatedAd","UpdatedAt","CommentCounter","LikeCounter","created_at","updated_at")
+                     SELECT "id","AuthorId","Title","Text","CreatedAd","UpdatedAt","CommentCounter","LikeCounter","created_at","updated_at" FROM "posts"[0m
+  [1m[35m (0.5ms)[0m  [1m[35mDROP TABLE "posts"[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE TABLE "posts" ("id" integer NOT NULL PRIMARY KEY, "Title" varchar DEFAULT NULL, "Text" text DEFAULT NULL, "CreatedAd" date DEFAULT NULL, "UpdatedAt" date DEFAULT NULL, "CommentCounter" integer DEFAULT NULL, "LikeCounter" integer DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "posts" ("id","Title","Text","CreatedAd","UpdatedAt","CommentCounter","LikeCounter","created_at","updated_at")
+                     SELECT "id","Title","Text","CreatedAd","UpdatedAt","CommentCounter","LikeCounter","created_at","updated_at" FROM "aposts"[0m
+  [1m[35m (0.4ms)[0m  [1m[35mDROP TABLE "aposts"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20230209101014"]]
+  [1m[36mTRANSACTION (2.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.6ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to RemoveColumnPostidPost (20230209101339)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE TEMPORARY TABLE "alikes" ("id" integer NOT NULL PRIMARY KEY, "PostId" integer DEFAULT NULL, "CreatedAt" date DEFAULT NULL, "UpatedAt" date DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.2ms)[0m  [1m[32mINSERT INTO "alikes" ("id","PostId","CreatedAt","UpatedAt","created_at","updated_at")
+                     SELECT "id","PostId","CreatedAt","UpatedAt","created_at","updated_at" FROM "likes"[0m
+  [1m[35m (0.4ms)[0m  [1m[35mDROP TABLE "likes"[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE TABLE "likes" ("id" integer NOT NULL PRIMARY KEY, "CreatedAt" date DEFAULT NULL, "UpatedAt" date DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "likes" ("id","CreatedAt","UpatedAt","created_at","updated_at")
+                     SELECT "id","CreatedAt","UpatedAt","created_at","updated_at" FROM "alikes"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE "alikes"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.7ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20230209101339"]]
+  [1m[36mTRANSACTION (2.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to RemoveColumnPostidComments (20230209101624)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.2ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.2ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.2ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE TEMPORARY TABLE "acomments" ("id" integer NOT NULL PRIMARY KEY, "PostId" integer DEFAULT NULL, "CreatedAt" date DEFAULT NULL, "UpdatedAt" date DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "Text" text DEFAULT NULL, "date_of_birth" datetime(6) DEFAULT NULL)[0m
+  [1m[35m (0.2ms)[0m  [1m[32mINSERT INTO "acomments" ("id","PostId","CreatedAt","UpdatedAt","created_at","updated_at","Text","date_of_birth")
+                     SELECT "id","PostId","CreatedAt","UpdatedAt","created_at","updated_at","Text","date_of_birth" FROM "comments"[0m
+  [1m[35m (0.8ms)[0m  [1m[35mDROP TABLE "comments"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TABLE "comments" ("id" integer NOT NULL PRIMARY KEY, "CreatedAt" date DEFAULT NULL, "UpdatedAt" date DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "Text" text DEFAULT NULL, "date_of_birth" datetime(6) DEFAULT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "comments" ("id","CreatedAt","UpdatedAt","created_at","updated_at","Text","date_of_birth")
+                     SELECT "id","CreatedAt","UpdatedAt","created_at","updated_at","Text","date_of_birth" FROM "acomments"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE "acomments"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20230209101624"]]
+  [1m[36mTRANSACTION (3.3ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.7ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::SchemaMigration Pluck (2.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to AddUsersToPost (20230209101932)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.2ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.2ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE TEMPORARY TABLE "aposts" ("id" integer NOT NULL PRIMARY KEY, "Title" varchar DEFAULT NULL, "Text" text DEFAULT NULL, "CreatedAd" date DEFAULT NULL, "UpdatedAt" date DEFAULT NULL, "CommentCounter" integer DEFAULT NULL, "LikeCounter" integer DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.3ms)[0m  [1m[32mINSERT INTO "aposts" ("id","Title","Text","CreatedAd","UpdatedAt","CommentCounter","LikeCounter","created_at","updated_at")
+                     SELECT "id","Title","Text","CreatedAd","UpdatedAt","CommentCounter","LikeCounter","created_at","updated_at" FROM "posts"[0m
+  [1m[35m (2.5ms)[0m  [1m[35mDROP TABLE "posts"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE TABLE "posts" ("id" integer NOT NULL PRIMARY KEY, "Title" varchar DEFAULT NULL, "Text" text DEFAULT NULL, "CreatedAd" date DEFAULT NULL, "UpdatedAt" date DEFAULT NULL, "CommentCounter" integer DEFAULT NULL, "LikeCounter" integer DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "users_id" integer NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "posts" ("id","Title","Text","CreatedAd","UpdatedAt","CommentCounter","LikeCounter","created_at","updated_at")
+                     SELECT "id","Title","Text","CreatedAd","UpdatedAt","CommentCounter","LikeCounter","created_at","updated_at" FROM "aposts"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE "aposts"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE INDEX "index_posts_on_users_id" ON "posts" ("users_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.2ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE TEMPORARY TABLE "aposts" ("id" integer NOT NULL PRIMARY KEY, "Title" varchar DEFAULT NULL, "Text" text DEFAULT NULL, "CreatedAd" date DEFAULT NULL, "UpdatedAt" date DEFAULT NULL, "CommentCounter" integer DEFAULT NULL, "LikeCounter" integer DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "users_id" integer NOT NULL)[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE INDEX "tindex_aposts_on_users_id" ON "aposts" ("users_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "aposts" ("id","Title","Text","CreatedAd","UpdatedAt","CommentCounter","LikeCounter","created_at","updated_at","users_id")
+                     SELECT "id","Title","Text","CreatedAd","UpdatedAt","CommentCounter","LikeCounter","created_at","updated_at","users_id" FROM "posts"[0m
+  [1m[35m (0.8ms)[0m  [1m[35mDROP TABLE "posts"[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE TABLE "posts" ("id" integer NOT NULL PRIMARY KEY, "Title" varchar DEFAULT NULL, "Text" text DEFAULT NULL, "CreatedAd" date DEFAULT NULL, "UpdatedAt" date DEFAULT NULL, "CommentCounter" integer DEFAULT NULL, "LikeCounter" integer DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "users_id" integer NOT NULL, CONSTRAINT "fk_rails_403c3577f5"
+FOREIGN KEY ("users_id")
+  REFERENCES "users" ("id")
+)[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE INDEX "index_posts_on_users_id" ON "posts" ("users_id")[0m
+  [1m[35m (0.2ms)[0m  [1m[32mINSERT INTO "posts" ("id","Title","Text","CreatedAd","UpdatedAt","CommentCounter","LikeCounter","created_at","updated_at","users_id")
+                     SELECT "id","Title","Text","CreatedAd","UpdatedAt","CommentCounter","LikeCounter","created_at","updated_at","users_id" FROM "aposts"[0m
+  [1m[35m (0.4ms)[0m  [1m[35mDROP TABLE "aposts"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.4ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20230209101932"]]
+  [1m[36mTRANSACTION (5.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to AddUsersToLike (20230209102547)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.2ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE TEMPORARY TABLE "alikes" ("id" integer NOT NULL PRIMARY KEY, "CreatedAt" date DEFAULT NULL, "UpatedAt" date DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "alikes" ("id","CreatedAt","UpatedAt","created_at","updated_at")
+                     SELECT "id","CreatedAt","UpatedAt","created_at","updated_at" FROM "likes"[0m
+  [1m[35m (0.4ms)[0m  [1m[35mDROP TABLE "likes"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "likes" ("id" integer NOT NULL PRIMARY KEY, "CreatedAt" date DEFAULT NULL, "UpatedAt" date DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "users_id" integer NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "likes" ("id","CreatedAt","UpatedAt","created_at","updated_at")
+                     SELECT "id","CreatedAt","UpatedAt","created_at","updated_at" FROM "alikes"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE "alikes"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE INDEX "index_likes_on_users_id" ON "likes" ("users_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TEMPORARY TABLE "alikes" ("id" integer NOT NULL PRIMARY KEY, "CreatedAt" date DEFAULT NULL, "UpatedAt" date DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "users_id" integer NOT NULL)[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE INDEX "tindex_alikes_on_users_id" ON "alikes" ("users_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "alikes" ("id","CreatedAt","UpatedAt","created_at","updated_at","users_id")
+                     SELECT "id","CreatedAt","UpatedAt","created_at","updated_at","users_id" FROM "likes"[0m
+  [1m[35m (0.4ms)[0m  [1m[35mDROP TABLE "likes"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TABLE "likes" ("id" integer NOT NULL PRIMARY KEY, "CreatedAt" date DEFAULT NULL, "UpatedAt" date DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "users_id" integer NOT NULL, CONSTRAINT "fk_rails_0831fd4d8e"
+FOREIGN KEY ("users_id")
+  REFERENCES "users" ("id")
+)[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE INDEX "index_likes_on_users_id" ON "likes" ("users_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "likes" ("id","CreatedAt","UpatedAt","created_at","updated_at","users_id")
+                     SELECT "id","CreatedAt","UpatedAt","created_at","updated_at","users_id" FROM "alikes"[0m
+  [1m[35m (0.4ms)[0m  [1m[35mDROP TABLE "alikes"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20230209102547"]]
+  [1m[36mTRANSACTION (6.3ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.4ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to AddUsersToComment (20230209102642)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.2ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE TEMPORARY TABLE "acomments" ("id" integer NOT NULL PRIMARY KEY, "CreatedAt" date DEFAULT NULL, "UpdatedAt" date DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "Text" text DEFAULT NULL, "date_of_birth" datetime(6) DEFAULT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "acomments" ("id","CreatedAt","UpdatedAt","created_at","updated_at","Text","date_of_birth")
+                     SELECT "id","CreatedAt","UpdatedAt","created_at","updated_at","Text","date_of_birth" FROM "comments"[0m
+  [1m[35m (0.5ms)[0m  [1m[35mDROP TABLE "comments"[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE TABLE "comments" ("id" integer NOT NULL PRIMARY KEY, "CreatedAt" date DEFAULT NULL, "UpdatedAt" date DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "Text" text DEFAULT NULL, "date_of_birth" datetime(6) DEFAULT NULL, "users_id" integer NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "comments" ("id","CreatedAt","UpdatedAt","created_at","updated_at","Text","date_of_birth")
+                     SELECT "id","CreatedAt","UpdatedAt","created_at","updated_at","Text","date_of_birth" FROM "acomments"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE "acomments"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE INDEX "index_comments_on_users_id" ON "comments" ("users_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.2ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TEMPORARY TABLE "acomments" ("id" integer NOT NULL PRIMARY KEY, "CreatedAt" date DEFAULT NULL, "UpdatedAt" date DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "Text" text DEFAULT NULL, "date_of_birth" datetime(6) DEFAULT NULL, "users_id" integer NOT NULL)[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE INDEX "tindex_acomments_on_users_id" ON "acomments" ("users_id")[0m
+  [1m[35m (0.3ms)[0m  [1m[32mINSERT INTO "acomments" ("id","CreatedAt","UpdatedAt","created_at","updated_at","Text","date_of_birth","users_id")
+                     SELECT "id","CreatedAt","UpdatedAt","created_at","updated_at","Text","date_of_birth","users_id" FROM "comments"[0m
+  [1m[35m (0.4ms)[0m  [1m[35mDROP TABLE "comments"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE TABLE "comments" ("id" integer NOT NULL PRIMARY KEY, "CreatedAt" date DEFAULT NULL, "UpdatedAt" date DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "Text" text DEFAULT NULL, "date_of_birth" datetime(6) DEFAULT NULL, "users_id" integer NOT NULL, CONSTRAINT "fk_rails_1e28850acb"
+FOREIGN KEY ("users_id")
+  REFERENCES "users" ("id")
+)[0m
+  [1m[35m (38.0ms)[0m  [1m[35mCREATE INDEX "index_comments_on_users_id" ON "comments" ("users_id")[0m
+  [1m[35m (0.2ms)[0m  [1m[32mINSERT INTO "comments" ("id","CreatedAt","UpdatedAt","created_at","updated_at","Text","date_of_birth","users_id")
+                     SELECT "id","CreatedAt","UpdatedAt","created_at","updated_at","Text","date_of_birth","users_id" FROM "acomments"[0m
+  [1m[35m (1.3ms)[0m  [1m[35mDROP TABLE "acomments"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.2ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20230209102642"]]
+  [1m[36mTRANSACTION (4.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.7ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to AddPostsToComment (20230209102801)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (3.3ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.2ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE TEMPORARY TABLE "acomments" ("id" integer NOT NULL PRIMARY KEY, "CreatedAt" date DEFAULT NULL, "UpdatedAt" date DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "Text" text DEFAULT NULL, "date_of_birth" datetime(6) DEFAULT NULL, "users_id" integer NOT NULL)[0m
+  [1m[35m (1.4ms)[0m  [1m[35mCREATE INDEX "tindex_acomments_on_users_id" ON "acomments" ("users_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "acomments" ("id","CreatedAt","UpdatedAt","created_at","updated_at","Text","date_of_birth","users_id")
+                     SELECT "id","CreatedAt","UpdatedAt","created_at","updated_at","Text","date_of_birth","users_id" FROM "comments"[0m
+  [1m[35m (0.5ms)[0m  [1m[35mDROP TABLE "comments"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to AddPostsToComment (20230209102947)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.9ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.4ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE TEMPORARY TABLE "acomments" ("id" integer NOT NULL PRIMARY KEY, "CreatedAt" date DEFAULT NULL, "UpdatedAt" date DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "Text" text DEFAULT NULL, "date_of_birth" datetime(6) DEFAULT NULL, "users_id" integer NOT NULL)[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE INDEX "tindex_acomments_on_users_id" ON "acomments" ("users_id")[0m
+  [1m[35m (0.2ms)[0m  [1m[32mINSERT INTO "acomments" ("id","CreatedAt","UpdatedAt","created_at","updated_at","Text","date_of_birth","users_id")
+                     SELECT "id","CreatedAt","UpdatedAt","created_at","updated_at","Text","date_of_birth","users_id" FROM "comments"[0m
+  [1m[35m (0.9ms)[0m  [1m[35mDROP TABLE "comments"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TABLE "comments" ("id" integer NOT NULL PRIMARY KEY, "CreatedAt" date DEFAULT NULL, "UpdatedAt" date DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "Text" text DEFAULT NULL, "date_of_birth" datetime(6) DEFAULT NULL, "users_id" integer NOT NULL, "posts_id" integer NOT NULL, CONSTRAINT "fk_rails_1e28850acb"
+FOREIGN KEY ("users_id")
+  REFERENCES "users" ("id")
+)[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE INDEX "index_comments_on_users_id" ON "comments" ("users_id")[0m
+  [1m[35m (0.2ms)[0m  [1m[32mINSERT INTO "comments" ("id","CreatedAt","UpdatedAt","created_at","updated_at","Text","date_of_birth","users_id")
+                     SELECT "id","CreatedAt","UpdatedAt","created_at","updated_at","Text","date_of_birth","users_id" FROM "acomments"[0m
+  [1m[35m (0.4ms)[0m  [1m[35mDROP TABLE "acomments"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE INDEX "index_comments_on_posts_id" ON "comments" ("posts_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TEMPORARY TABLE "acomments" ("id" integer NOT NULL PRIMARY KEY, "CreatedAt" date DEFAULT NULL, "UpdatedAt" date DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "Text" text DEFAULT NULL, "date_of_birth" datetime(6) DEFAULT NULL, "users_id" integer NOT NULL, "posts_id" integer NOT NULL)[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE INDEX "tindex_acomments_on_posts_id" ON "acomments" ("posts_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "tindex_acomments_on_users_id" ON "acomments" ("users_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "acomments" ("id","CreatedAt","UpdatedAt","created_at","updated_at","Text","date_of_birth","users_id","posts_id")
+                     SELECT "id","CreatedAt","UpdatedAt","created_at","updated_at","Text","date_of_birth","users_id","posts_id" FROM "comments"[0m
+  [1m[35m (0.5ms)[0m  [1m[35mDROP TABLE "comments"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TABLE "comments" ("id" integer NOT NULL PRIMARY KEY, "CreatedAt" date DEFAULT NULL, "UpdatedAt" date DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "Text" text DEFAULT NULL, "date_of_birth" datetime(6) DEFAULT NULL, "users_id" integer NOT NULL, "posts_id" integer NOT NULL, CONSTRAINT "fk_rails_1e28850acb"
+FOREIGN KEY ("users_id")
+  REFERENCES "users" ("id")
+, CONSTRAINT "fk_rails_581572ac1f"
+FOREIGN KEY ("posts_id")
+  REFERENCES "posts" ("id")
+)[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE INDEX "index_comments_on_users_id" ON "comments" ("users_id")[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE INDEX "index_comments_on_posts_id" ON "comments" ("posts_id")[0m
+  [1m[35m (0.2ms)[0m  [1m[32mINSERT INTO "comments" ("id","CreatedAt","UpdatedAt","created_at","updated_at","Text","date_of_birth","users_id","posts_id")
+                     SELECT "id","CreatedAt","UpdatedAt","created_at","updated_at","Text","date_of_birth","users_id","posts_id" FROM "acomments"[0m
+  [1m[35m (0.5ms)[0m  [1m[35mDROP TABLE "acomments"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20230209102947"]]
+  [1m[36mTRANSACTION (9.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to AddPostsToLikes (20230209103101)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE TEMPORARY TABLE "alikes" ("id" integer NOT NULL PRIMARY KEY, "CreatedAt" date DEFAULT NULL, "UpatedAt" date DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "users_id" integer NOT NULL)[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE INDEX "tindex_alikes_on_users_id" ON "alikes" ("users_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "alikes" ("id","CreatedAt","UpatedAt","created_at","updated_at","users_id")
+                     SELECT "id","CreatedAt","UpatedAt","created_at","updated_at","users_id" FROM "likes"[0m
+  [1m[35m (0.6ms)[0m  [1m[35mDROP TABLE "likes"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TABLE "likes" ("id" integer NOT NULL PRIMARY KEY, "CreatedAt" date DEFAULT NULL, "UpatedAt" date DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "users_id" integer NOT NULL, "posts_id" integer NOT NULL, CONSTRAINT "fk_rails_0831fd4d8e"
+FOREIGN KEY ("users_id")
+  REFERENCES "users" ("id")
+)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_likes_on_users_id" ON "likes" ("users_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "likes" ("id","CreatedAt","UpatedAt","created_at","updated_at","users_id")
+                     SELECT "id","CreatedAt","UpatedAt","created_at","updated_at","users_id" FROM "alikes"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE "alikes"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE INDEX "index_likes_on_posts_id" ON "likes" ("posts_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.2ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE TEMPORARY TABLE "alikes" ("id" integer NOT NULL PRIMARY KEY, "CreatedAt" date DEFAULT NULL, "UpatedAt" date DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "users_id" integer NOT NULL, "posts_id" integer NOT NULL)[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE INDEX "tindex_alikes_on_posts_id" ON "alikes" ("posts_id")[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE INDEX "tindex_alikes_on_users_id" ON "alikes" ("users_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "alikes" ("id","CreatedAt","UpatedAt","created_at","updated_at","users_id","posts_id")
+                     SELECT "id","CreatedAt","UpatedAt","created_at","updated_at","users_id","posts_id" FROM "likes"[0m
+  [1m[35m (16.2ms)[0m  [1m[35mDROP TABLE "likes"[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE TABLE "likes" ("id" integer NOT NULL PRIMARY KEY, "CreatedAt" date DEFAULT NULL, "UpatedAt" date DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "users_id" integer NOT NULL, "posts_id" integer NOT NULL, CONSTRAINT "fk_rails_0831fd4d8e"
+FOREIGN KEY ("users_id")
+  REFERENCES "users" ("id")
+, CONSTRAINT "fk_rails_b1afef8225"
+FOREIGN KEY ("posts_id")
+  REFERENCES "posts" ("id")
+)[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE INDEX "index_likes_on_users_id" ON "likes" ("users_id")[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE INDEX "index_likes_on_posts_id" ON "likes" ("posts_id")[0m
+  [1m[35m (0.6ms)[0m  [1m[32mINSERT INTO "likes" ("id","CreatedAt","UpatedAt","created_at","updated_at","users_id","posts_id")
+                     SELECT "id","CreatedAt","UpatedAt","created_at","updated_at","users_id","posts_id" FROM "alikes"[0m
+  [1m[35m (0.4ms)[0m  [1m[35mDROP TABLE "alikes"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20230209103101"]]
+  [1m[36mTRANSACTION (5.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.5ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started GET "/" for 127.0.0.1 at 2023-03-21 01:20:09 +0500
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by PagesController#hello as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering pages/hello.html.erb within layouts/application
+  Rendered pages/hello.html.erb within layouts/application (Duration: 2.5ms | Allocations: 463)
+  Rendered layout layouts/application.html.erb (Duration: 155.7ms | Allocations: 35452)
+Completed 200 OK in 175ms (Views: 163.1ms | ActiveRecord: 0.0ms | Allocations: 41493)
+
+

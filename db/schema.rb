@@ -10,28 +10,32 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_09_034108) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_09_103101) do
   create_table "comments", force: :cascade do |t|
-    t.integer "AuthorId"
-    t.integer "PostId"
-    t.text "Text"
     t.date "CreatedAt"
     t.date "UpdatedAt"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "Text"
+    t.datetime "date_of_birth"
+    t.integer "users_id", null: false
+    t.integer "posts_id", null: false
+    t.index ["posts_id"], name: "index_comments_on_posts_id"
+    t.index ["users_id"], name: "index_comments_on_users_id"
   end
 
   create_table "likes", force: :cascade do |t|
-    t.integer "AuthorId"
-    t.integer "PostId"
     t.date "CreatedAt"
     t.date "UpatedAt"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "users_id", null: false
+    t.integer "posts_id", null: false
+    t.index ["posts_id"], name: "index_likes_on_posts_id"
+    t.index ["users_id"], name: "index_likes_on_users_id"
   end
 
   create_table "posts", force: :cascade do |t|
-    t.integer "AuthorId"
     t.string "Title"
     t.text "Text"
     t.date "CreatedAd"
@@ -40,17 +44,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_09_034108) do
     t.integer "LikeCounter"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "students", force: :cascade do |t|
-    t.string "first_name"
-    t.string "last_name"
-    t.string "address"
-    t.integer "age"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "contact"
-    t.string "identity"
+    t.integer "users_id", null: false
+    t.index ["users_id"], name: "index_posts_on_users_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -64,4 +59,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_09_034108) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "comments", "posts", column: "posts_id"
+  add_foreign_key "comments", "users", column: "users_id"
+  add_foreign_key "likes", "posts", column: "posts_id"
+  add_foreign_key "likes", "users", column: "users_id"
+  add_foreign_key "posts", "users", column: "users_id"
 end
